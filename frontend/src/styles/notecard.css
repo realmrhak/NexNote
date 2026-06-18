@@ -1,0 +1,169 @@
+/* ── Note Card ── */
+.note-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 14px 16px;
+  cursor: pointer;
+  position: relative;
+  transition: box-shadow var(--transition), transform var(--transition), border-color var(--transition);
+  box-shadow: var(--shadow-card);
+  animation: fadeUp 0.3s ease both;
+}
+.note-card:hover {
+  box-shadow: var(--shadow-card-hover);
+  transform: translateY(-2px);
+  border-color: var(--accent);
+}
+.note-card:active { transform: translateY(0); }
+
+.note-card-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+
+.note-card-title {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.4;
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.note-card-actions {
+  display: flex;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.note-pin-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 4px;
+  font-size: 14px;
+  color: var(--text-secondary);
+  opacity: 0.6;
+  transition: opacity var(--transition), transform var(--transition);
+  line-height: 1;
+}
+.note-pin-btn:hover { opacity: 1; transform: scale(1.2); }
+.note-pin-btn.pinned { color: #f59e0b; opacity: 1; }
+
+.note-menu-wrap { position: relative; }
+.note-menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 2px 6px;
+  font-size: 18px;
+  color: var(--text-secondary);
+  line-height: 1;
+  transition: color var(--transition);
+}
+.note-menu-btn:hover { color: var(--text-primary); }
+
+.note-dropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 4px 0;
+  z-index: 100;
+  min-width: 130px;
+  box-shadow: var(--shadow-card-hover);
+  animation: scaleIn 0.15s ease both;
+  transform-origin: top right;
+}
+.note-dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 8px 14px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-size: 13px;
+  font-family: var(--font);
+  color: var(--text-primary);
+  transition: background var(--transition);
+}
+.note-dropdown-item:hover { background: var(--bg-hover); }
+.note-dropdown-item.danger { color: #dc2626; }
+
+.note-folder-badge {
+  font-size: 11px;
+  color: var(--accent);
+  margin: 0 0 4px;
+  font-weight: 500;
+}
+
+.note-body-preview {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin: 0 0 10px;
+  line-height: 1.55;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.note-card-footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.note-tags { display: flex; flex-wrap: wrap; gap: 4px; }
+
+.note-time {
+  font-size: 11px;
+  color: var(--text-secondary);
+}
+
+/* Tag chip */
+.tag-chip {
+  font-size: 11px;
+  font-weight: 500;
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  transition: transform var(--transition);
+}
+.tag-chip:hover { transform: scale(1.05); }
+
+.tag-remove-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: inherit;
+  padding: 0;
+  line-height: 1;
+  opacity: 0.7;
+  font-size: 13px;
+  transition: opacity var(--transition);
+}
+.tag-remove-btn:hover { opacity: 1; }
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .note-card { padding: 12px 14px; }
+  .note-card-title { font-size: 14px; }
+  .note-body-preview { font-size: 12px; -webkit-line-clamp: 2; }
+  .note-dropdown { min-width: 120px; }
+}

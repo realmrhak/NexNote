@@ -1,0 +1,405 @@
+/* ─── Todos Page ─────────────────────────────────────────────────────────── */
+.todos-page {
+  display: flex;
+  min-height: 100vh;
+  position: relative;
+}
+
+.todos-main {
+  flex: 1;
+  padding: 32px 40px;
+  overflow-y: auto;
+  max-height: 100vh;
+}
+
+.todos-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 28px;
+}
+
+.todos-header h1 {
+  font-size: 28px;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.todos-btn-primary {
+  padding: 10px 20px;
+  background: #2383E2;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.todos-btn-primary:hover { background: #1a6fc9; }
+
+.todos-error {
+  color: #e53e3e;
+  background: #fff5f5;
+  padding: 10px 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  font-size: 14px;
+}
+
+/* ─── Stats ──────────────────────────────────────────────────────────────── */
+.todos-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.todo-stat-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 18px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.todo-stat-num {
+  font-size: 28px;
+  font-weight: 800;
+  color: #2383E2;
+}
+.todo-stat-card.completed .todo-stat-num { color: #16a34a; }
+.todo-stat-card.active .todo-stat-num { color: #f59e0b; }
+.todo-stat-card.overdue .todo-stat-num { color: #e53e3e; }
+.todo-stat-card span:last-child {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* ─── Filters ────────────────────────────────────────────────────────────── */
+.todos-filters {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+.todos-filters::-webkit-scrollbar { display: none; }
+
+.todos-filter-btn {
+  padding: 8px 16px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-secondary);
+  font-size: 13px;
+  font-weight: 600;
+  font-family: var(--font);
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.todos-filter-btn.active {
+  background: #2383E2;
+  color: #fff;
+  border-color: #2383E2;
+}
+.todos-filter-btn:hover:not(.active) {
+  background: var(--hover-bg);
+}
+
+/* ─── Todo List ──────────────────────────────────────────────────────────── */
+.todos-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.todos-empty {
+  text-align: center;
+  padding: 60px 20px;
+  color: var(--text-secondary);
+}
+.todos-empty-icon { font-size: 48px; margin-bottom: 12px; }
+.todos-empty h2 { font-size: 22px; margin-bottom: 8px; color: var(--text-primary); }
+.todos-empty p { margin-bottom: 20px; }
+
+.todo-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 14px 18px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  transition: all 0.15s;
+}
+.todo-item:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+.todo-item.completed { opacity: 0.7; }
+
+.todo-checkbox {
+  width: 22px;
+  height: 22px;
+  min-width: 22px;
+  border-radius: 50%;
+  border: 2px solid var(--border);
+  background: transparent;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  color: #fff;
+  transition: all 0.2s;
+  margin-top: 2px;
+}
+.todo-checkbox.checked {
+  background: #16a34a;
+  border-color: #16a34a;
+}
+
+.todo-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.todo-title-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.todo-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+.todo-title.done {
+  text-decoration: line-through;
+  color: var(--text-tertiary);
+}
+
+.todo-priority-badge {
+  padding: 2px 8px;
+  border-radius: 10px;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.todo-description {
+  font-size: 13px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+  line-height: 1.5;
+}
+
+.todo-meta {
+  display: flex;
+  gap: 12px;
+  margin-top: 6px;
+  font-size: 12px;
+  color: var(--text-tertiary);
+}
+
+.todo-due.overdue {
+  color: #e53e3e;
+  font-weight: 600;
+}
+
+.todo-actions {
+  display: flex;
+  gap: 4px;
+  opacity: 0;
+  transition: opacity 0.15s;
+  flex-shrink: 0;
+}
+.todo-item:hover .todo-actions { opacity: 1; }
+
+.todo-action-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  cursor: pointer;
+  font-size: 14px;
+  font-family: var(--font);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.15s;
+}
+.todo-action-btn:hover { background: var(--hover-bg); }
+.todo-action-btn.danger:hover { background: #fff5f5; }
+
+/* ─── Mobile Hidden utility ──────────────────────────────────────────────── */
+.mobile-hidden { display: none !important; }
+
+/* ─── Responsive ─────────────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .todos-main { padding: 20px 16px; }
+  .todos-stats { grid-template-columns: repeat(2, 1fr); }
+  .todo-actions { opacity: 1; }
+  .todo-item { padding: 12px 14px; }
+  .todos-header h1 { font-size: 22px; }
+  .todos-mobile-header { margin: -20px -16px 20px; }
+
+  /* BUG #7 FIX: Ensure minimum 44x44px touch targets for checkbox + action
+     buttons on mobile. We use a transparent ::before pseudo-element so the
+     visible button stays compact but the touch area is enlarged. */
+  .todo-checkbox {
+    position: relative;
+  }
+  .todo-checkbox::before {
+    content: "";
+    position: absolute;
+    inset: -11px;
+  }
+  .todo-action-btn {
+    position: relative;
+    width: 36px;
+    height: 36px;
+  }
+  .todo-action-btn::before {
+    content: "";
+    position: absolute;
+    inset: -4px;
+  }
+}
+@media (max-width: 480px) {
+  .todos-main { padding: 16px 12px; }
+  .todos-stats { gap: 8px; }
+  .todo-stat-card { padding: 12px; }
+  .todo-stat-num { font-size: 22px; }
+  .todos-filters { gap: 6px; }
+  .todos-filter-btn { padding: 6px 12px; font-size: 12px; }
+}
+
+/* ──────────────────────────────────────────────────────────────────────────
+   TODO FORM (inside Modal)
+   ──────────────────────────────────────────────────────────────────────────
+   FIX: The "Create New Todo" and "Edit Todo" modals use <div className="todo-form">
+   with <label>, <input>, <textarea>, and <select> children — but these classes
+   had NO CSS defined, so the form was rendering with default browser styles
+   (labels inline, inputs unstyled, asterisks showing as blue underlined links,
+   no spacing, no borders, no focus states). This block adds proper styling.
+   ────────────────────────────────────────────────────────────────────────── */
+
+.todo-form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin: 12px 0 20px;
+  text-align: left;
+}
+
+.todo-form label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: -6px; /* pull input closer to label since gap is on the container */
+  font-family: var(--font);
+}
+
+.todo-form input[type="text"],
+.todo-form input[type="date"],
+.todo-form input:not([type]),
+.todo-form textarea,
+.todo-form select {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 14px;
+  font-family: var(--font);
+  color: var(--text-primary);
+  background: var(--bg-input, #fff);
+  border: 1.5px solid var(--border, #e2e8f0);
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  box-sizing: border-box;
+  -webkit-appearance: none; /* remove iOS date picker styling quirks */
+  appearance: none;
+}
+
+/* Dark mode date input: invert the calendar icon so it's visible */
+.dark .todo-form input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(1);
+  opacity: 0.6;
+  cursor: pointer;
+}
+.dark .todo-form input[type="date"]::-webkit-calendar-picker-indicator:hover {
+  opacity: 1;
+}
+
+.todo-form textarea {
+  resize: vertical;
+  min-height: 70px;
+  font-family: var(--font);
+  line-height: 1.5;
+}
+
+.todo-form select {
+  cursor: pointer;
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2364748b' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 12px center;
+  background-size: 12px;
+  padding-right: 36px; /* room for the custom arrow */
+}
+
+.dark .todo-form select {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");
+}
+
+.todo-form input:focus,
+.todo-form textarea:focus,
+.todo-form select:focus {
+  border-color: var(--accent, #2383E2);
+  box-shadow: 0 0 0 3px rgba(35, 131, 226, 0.12);
+}
+
+.todo-form input::placeholder,
+.todo-form textarea::placeholder {
+  color: var(--text-secondary, #94a3b8);
+  opacity: 1;
+}
+
+/* The asterisk in "Title *" — make it red and bold (not a blue link) */
+.todo-form label::after {
+  content: "";
+}
+/* Some forms put the asterisk as a literal * in the label text. We style
+   any "*" inside the label red via a span fallback in JSX. If you see a
+   blue underlined * in the modal, it means the browser is auto-linking it
+   — the rule below prevents that. */
+.todo-form label * {
+  color: #e53e3e;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* Mobile: slightly smaller padding so the modal fits on small screens */
+@media (max-width: 480px) {
+  .todo-form { gap: 12px; margin: 8px 0 16px; }
+  .todo-form input,
+  .todo-form textarea,
+  .todo-form select {
+    padding: 9px 10px;
+    font-size: 16px; /* prevents iOS zoom on focus */
+  }
+}
+
+/* Required field marker — red asterisk */
+.todo-form .required-mark {
+  color: #e53e3e !important;
+  font-weight: 700;
+  margin-left: 2px;
+}

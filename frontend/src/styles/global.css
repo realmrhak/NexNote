@@ -1,0 +1,168 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap');
+
+/* ── Reset ── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── CSS Variables ── */
+:root {
+  --accent: #2383E2;
+  --accent-hover: #1a6ec7;
+
+  --bg-primary: #ffffff;
+  --bg-sidebar: #f7f7f5;
+  --bg-input: #f7f7f5;
+  --bg-card: #ffffff;
+  --bg-hover: #ebebeb;
+
+  --border: #e9e9e7;
+  --text-primary: #1a1a1a;
+  --text-secondary: #9b9a97;
+  --text-muted: #6b6b6b;
+  --text-tertiary: #999;
+  --card-bg: #ffffff;
+  --hover-bg: #ebebeb;
+
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.06);
+  --shadow-card-hover: 0 4px 16px rgba(0,0,0,0.12);
+  --shadow-modal: 0 8px 40px rgba(0,0,0,0.2);
+  --shadow-fab: 0 4px 16px rgba(35,131,226,0.4);
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 8px;
+  --radius-xl: 10px;
+  --radius-full: 9999px;
+
+  --font: 'Poppins', system-ui, sans-serif;
+  --sidebar-width: 240px;
+  --transition: 0.18s ease;
+}
+
+/* ── Dark Mode ── */
+.dark {
+  --accent: #4A9EFF;
+  --accent-hover: #3a8fe0;
+  --bg-primary: #191919;
+  --bg-sidebar: #252525;
+  --bg-input: #2f2f2f;
+  --bg-card: #252525;
+  --bg-hover: #333333;
+  --border: #333333;
+  --text-primary: #fffffe;
+  --text-secondary: #888888;
+  --text-muted: #aaaaaa;
+  --text-tertiary: #777;
+  --card-bg: #252525;
+  --hover-bg: #333333;
+  --shadow-card: 0 1px 3px rgba(0,0,0,0.2);
+  --shadow-card-hover: 0 4px 16px rgba(0,0,0,0.4);
+  --shadow-modal: 0 8px 40px rgba(0,0,0,0.5);
+}
+
+body {
+  font-family: var(--font);
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  -webkit-font-smoothing: antialiased;
+}
+
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: var(--radius-full); }
+
+/* ── Keyframes ── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes slideInRight {
+  from { opacity: 0; transform: translateX(60px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes slideInLeft {
+  from { opacity: 0; transform: translateX(-24px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.92); }
+  to   { opacity: 1; transform: scale(1); }
+}
+@keyframes popIn {
+  0%   { opacity: 0; transform: scale(0.8); }
+  70%  { transform: scale(1.06); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+/* ── Utility Animation Classes ── */
+.anim-fade-in    { animation: fadeIn 0.25s ease both; }
+.anim-fade-up    { animation: fadeUp 0.3s ease both; }
+.anim-slide-right { animation: slideInRight 0.25s ease both; }
+.anim-slide-left  { animation: slideInLeft 0.22s ease both; }
+.anim-scale-in   { animation: scaleIn 0.22s ease both; }
+.anim-pop        { animation: popIn 0.3s ease both; }
+
+.stagger > *:nth-child(1) { animation-delay: 0.04s; }
+.stagger > *:nth-child(2) { animation-delay: 0.08s; }
+.stagger > *:nth-child(3) { animation-delay: 0.12s; }
+.stagger > *:nth-child(4) { animation-delay: 0.16s; }
+.stagger > *:nth-child(5) { animation-delay: 0.20s; }
+.stagger > *:nth-child(6) { animation-delay: 0.24s; }
+
+/* ── Mobile Bottom Navigation ── REMOVED (FIX #4a v2) ── */
+/* Bottom nav was removed; users navigate via the hamburger sidebar.
+   Keeping this comment so future contributors know not to re-add it. */
+
+/* Mobile menu button (shared) */
+.mobile-menu-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 22px;
+  color: var(--text-secondary);
+  transition: transform var(--transition);
+}
+.mobile-menu-btn:hover { transform: scale(1.1); }
+
+/* Sidebar overlay (shared) */
+.sidebar-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.4);
+  z-index: 500;
+  animation: fadeIn 0.2s ease both;
+}
+
+/* Sidebar wrapper (shared) */
+.sidebar-wrapper {
+  position: relative;
+  z-index: 600;
+  height: 100vh;
+  flex-shrink: 0;
+}
+.sidebar-wrapper.mobile {
+  position: fixed;
+  left: 0;
+  top: 0;
+  transform: translateX(-100%);
+  transition: transform 0.25s ease;
+  z-index: 600;
+}
+.sidebar-wrapper.mobile.open {
+  transform: translateX(0);
+}
+
+/* Mobile hidden class */
+.mobile-hidden {
+  display: none;
+}
+@media (min-width: 769px) {
+  .mobile-hidden { display: revert; }
+}

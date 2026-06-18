@@ -1,0 +1,45 @@
+# Render Blueprint — deploy the NexNote backend to Render in one click.
+# Docs: https://render.com/docs/blueprint-spec
+#
+# Usage:
+#   1. Push this repo to GitHub.
+#   2. On Render → New → Blueprint → pick this repo.
+#   3. Render will read this file and create the Web Service for you.
+#   4. After creation, fill in the environment variables listed below
+#      (Render → Environment tab) — they are NOT inlined here for security.
+#
+# IMPORTANT: rootDir is set to "backend" so Render uses backend/package.json
+# (which has the "start" script). If you deploy MANUALLY (not via Blueprint),
+# make sure to set "Root Directory" to "backend" in the Render dashboard.
+
+services:
+  - type: web
+    name: nexnote-api
+    env: node
+    rootDir: backend
+    plan: free                # bump to "starter" to avoid cold starts
+    region: singapore         # change to your nearest region
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 5001
+      # Secrets — set these in the Render dashboard after creation:
+      # - MONGODB_URI           (Atlas connection string)
+      # - JWT_SECRET            (32+ random chars)
+      # - JWT_REFRESH_SECRET    (32+ different random chars)
+      # - JWT_EXPIRES_IN        (15m)
+      # - JWT_REFRESH_EXPIRES_IN (7d)
+      # - FRONTEND_URL          (your Vercel URL — https://your-app.vercel.app)
+      # - CORS_ORIGINS          (comma-separated: production + preview URLs)
+      # - RATE_LIMIT_WINDOW_MS  (900000)
+      # - RATE_LIMIT_MAX        (2000 — bumped in Round 4 for normal-use headroom)
+      # - AUTH_RATE_LIMIT_MAX   (100)
+      # - REFRESH_RATE_LIMIT_MAX (500)
+      # - BCRYPT_ROUNDS         (12)
+      # - SMTP_USER             (your Gmail address)
+      # - SMTP_PASS             (16-char Gmail App Password — no spaces)

@@ -1,0 +1,321 @@
+/* ── Note Editor ── */
+.editor-page {
+  min-height: 100vh;
+  background: var(--bg-primary);
+  font-family: var(--font);
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.2s ease both;
+}
+
+.editor-toolbar {
+  border-bottom: 1px solid var(--border);
+  padding: 12px 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-shrink: 0;
+  background: var(--bg-primary);
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.editor-toolbar-left {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  overflow: hidden;
+  min-width: 0;
+}
+
+.editor-back-btn {
+  padding: 7px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: none;
+  cursor: pointer;
+  font-size: 13px;
+  color: var(--text-secondary);
+  font-family: var(--font);
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  transition: background var(--transition), color var(--transition), transform var(--transition);
+  flex-shrink: 0;
+}
+.editor-back-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+  transform: translateX(-2px);
+}
+
+.editor-breadcrumb {
+  font-size: 13px;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.editor-breadcrumb em {
+  color: var(--text-primary);
+  font-style: normal;
+  font-weight: 500;
+}
+
+.editor-toolbar-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-shrink: 0;
+}
+
+.editor-save-status {
+  font-size: 12px;
+  color: var(--text-secondary);
+  font-weight: 500;
+  transition: color var(--transition);
+}
+.editor-save-status.saving { color: var(--accent); }
+
+.editor-toolbar-btn {
+  padding: 7px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border);
+  background: none;
+  cursor: pointer;
+  font-size: 13px;
+  font-family: var(--font);
+  color: var(--text-secondary);
+  font-weight: 500;
+  transition: background var(--transition), color var(--transition), transform var(--transition);
+}
+.editor-toolbar-btn:hover {
+  background: var(--bg-hover);
+  color: var(--text-primary);
+  transform: translateY(-1px);
+}
+.editor-toolbar-btn.pin-active {
+  background: #fffbeb;
+  color: #f59e0b;
+  border-color: #fde68a;
+}
+.dark .editor-toolbar-btn.pin-active {
+  background: #2a2000;
+  border-color: #78350f;
+}
+/* BUG 1 FIX: Save button styling */
+.editor-toolbar-btn.save-btn {
+  border-color: #93c5fd;
+  color: #2383E2;
+  background: #eff6ff;
+}
+.editor-toolbar-btn.save-btn:hover {
+  background: #dbeafe;
+  color: #1d4ed8;
+  transform: translateY(-1px);
+}
+.editor-toolbar-btn.save-btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+.dark .editor-toolbar-btn.save-btn {
+  border-color: #1e40af;
+  color: #60a5fa;
+  background: #1e1b4b;
+}
+.dark .editor-toolbar-btn.save-btn:hover {
+  background: #1e3a5f;
+  color: #93c5fd;
+}
+
+.editor-toolbar-btn.danger {
+  border-color: #fca5a5;
+  color: #dc2626;
+}
+.editor-toolbar-btn.danger:hover {
+  background: #fef2f2;
+  color: #dc2626;
+}
+.dark .editor-toolbar-btn.danger:hover {
+  background: #2a0a0a;
+}
+
+/* Editor body */
+.editor-body {
+  flex: 1;
+  max-width: 1100px;
+  width: 100%;
+  margin: 0 auto;
+  padding: 36px 28px 80px;
+  animation: fadeUp 0.3s ease both;
+}
+
+/* BUG #3 FIX: "X is editing..." indicator shown in the toolbar when other
+   editors are currently in the note room. */
+.editor-presence-indicator {
+  font-size: 12px;
+  font-weight: 600;
+  color: #16a34a;
+  background: rgba(22, 163, 74, 0.1);
+  padding: 4px 10px;
+  border-radius: 9999px;
+  white-space: nowrap;
+  max-width: 200px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  animation: fadeIn 0.2s ease both;
+}
+.dark .editor-presence-indicator {
+  color: #4ade80;
+  background: rgba(34, 197, 94, 0.15);
+}
+
+.editor-title {
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  font-size: 38px;
+  font-weight: 800;
+  line-height: 1.2;
+  color: var(--text-primary);
+  background: transparent;
+  font-family: var(--font);
+  margin-bottom: 16px;
+  letter-spacing: -0.5px;
+  overflow: hidden;
+}
+.editor-title::placeholder { color: var(--border); }
+
+.editor-tags-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+  min-height: 28px;
+}
+
+.editor-tag-input {
+  border: none;
+  outline: none;
+  font-size: 13px;
+  color: var(--text-secondary);
+  background: transparent;
+  font-family: var(--font);
+  min-width: 140px;
+}
+.editor-tag-input::placeholder { color: var(--border); }
+
+.editor-folder-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 24px;
+}
+.editor-folder-label {
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+.editor-folder-select {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 5px 10px;
+  background: var(--bg-input);
+  color: var(--text-primary);
+  font-size: 13px;
+  font-family: var(--font);
+  cursor: pointer;
+  outline: none;
+  transition: border-color var(--transition);
+}
+.editor-folder-select:focus { border-color: var(--accent); }
+
+.editor-divider {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin-bottom: 20px;
+}
+
+.editor-content {
+  width: 100%;
+  border: none;
+  outline: none;
+  resize: none;
+  font-size: 16px;
+  line-height: 1.8;
+  color: var(--text-primary);
+  background: transparent;
+  font-family: var(--font);
+  min-height: 400px;
+}
+.editor-content::placeholder { color: var(--border); }
+
+/* ─── Mobile Responsive ────────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .editor-toolbar {
+    padding: 10px 12px;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .editor-toolbar-right {
+    gap: 4px;
+  }
+  .editor-toolbar-btn {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+  .editor-body {
+    padding: 24px 16px 60px;
+  }
+  .editor-title {
+    font-size: 26px;
+  }
+  .editor-breadcrumb {
+    display: none;
+  }
+  .editor-save-status {
+    display: none;
+  }
+  /* On mobile, show full-screen editor with back button */
+  .editor-toolbar-btn span.btn-label {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .editor-toolbar {
+    padding: 8px 10px;
+  }
+  .editor-back-btn {
+    padding: 6px 10px;
+    font-size: 12px;
+  }
+  .editor-toolbar-btn {
+    padding: 5px 8px;
+    font-size: 11px;
+  }
+  .editor-body {
+    padding: 16px 12px 60px;
+  }
+  .editor-title {
+    font-size: 22px;
+  }
+  .editor-content {
+    font-size: 15px;
+    min-height: 300px;
+  }
+  .editor-folder-row {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+  }
+  .editor-folder-select {
+    width: 100%;
+  }
+}

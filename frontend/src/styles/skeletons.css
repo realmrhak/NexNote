@@ -1,0 +1,70 @@
+/* Skeleton loading animations */
+@keyframes skeleton-shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton-card {
+  background: var(--bg-secondary, #f5f5f5);
+  border-radius: 10px;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 100px;
+}
+
+.skeleton-card.row {
+  flex-direction: row;
+  align-items: center;
+  min-height: auto;
+  padding: 12px 16px;
+}
+
+.skeleton-line {
+  height: 14px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--bg-tertiary, #e0e0e0) 25%, var(--bg-secondary, #f0f0f0) 50%, var(--bg-tertiary, #e0e0e0) 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+
+.skeleton-line.sm { height: 10px; }
+.skeleton-line.w5 { width: 5%; }
+.skeleton-line.w8 { width: 8%; }
+.skeleton-line.w10 { width: 10%; }
+.skeleton-line.w30 { width: 30%; }
+.skeleton-line.w40 { width: 40%; }
+.skeleton-line.w50 { width: 50%; }
+.skeleton-line.w60 { width: 60%; }
+.skeleton-line.w70 { width: 70%; }
+.skeleton-line.w80 { width: 80%; }
+.skeleton-line.w90 { width: 90%; }
+
+.skeleton-line.circle {
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  min-width: 24px;
+}
+
+.skeleton-pulse {
+  background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+  border-radius: 4px;
+}
+
+.dark .skeleton-card {
+  background: var(--bg-secondary, #1e1e2e);
+}
+
+.dark .skeleton-line {
+  background: linear-gradient(90deg, #2a2a3e 25%, #33334d 50%, #2a2a3e 75%);
+  background-size: 200% 100%;
+}
+
+.dark .skeleton-pulse {
+  background: linear-gradient(90deg, #2a2a3e 25%, #33334d 50%, #2a2a3e 75%);
+  background-size: 200% 100%;
+}

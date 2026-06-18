@@ -1,0 +1,17 @@
+{
+  "name": "nexnote",
+  "version": "2.0.0",
+  "private": true,
+  "description": "Collaborative note-taking app — React frontend (Vercel) + Express backend (Render).",
+  "scripts": {
+    "start":           "npm --prefix backend start",
+    "dev:backend":     "npm --prefix backend run dev",
+    "dev:frontend":    "npm --prefix frontend run dev",
+    "build:frontend":  "npm --prefix frontend run build",
+    "build":           "npm --prefix backend install && npm --prefix frontend install",
+    "start:backend":   "npm --prefix backend start",
+    "install:all":     "npm --prefix backend install && npm --prefix frontend install"
+  },
+  "engines": { "node": ">=18.0.0" },
+  "license": "MIT"
+}
